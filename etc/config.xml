@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <packstation_dhl>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <model>MageSuite\PackstationDhl\Model\Carrier\PackstationDhl</model>
+                <price>0.00</price>
+                <title>Packstation DHL</title>
+                <type>O</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </packstation_dhl>
+        </carriers>
+    </default>
+</config>
