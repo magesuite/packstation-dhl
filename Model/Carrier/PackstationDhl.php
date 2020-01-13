@@ -6,7 +6,7 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
     /**
      * @var string
      */
-    protected $_code = 'packstation_dhl';
+    protected $_code = 'dhl_packstation';
 
     /**
      * @var bool
