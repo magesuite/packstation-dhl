@@ -4,6 +4,7 @@
         <carriers>
             <dhl_packstation>
                 <active>0</active>
+                <mode>sandbox</mode>
                 <sallowspecific>0</sallowspecific>
                 <model>MageSuite\PackstationDhl\Model\Carrier\PackstationDhl</model>
                 <price>0.00</price>
