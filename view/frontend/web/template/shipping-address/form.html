@@ -1,0 +1,12 @@
+<form
+    class="form form-packstation-address"
+    id="co-packstation-address-form"
+    data-bind="attr: {'data-hasrequired': $t('* Required Fields')}"
+>
+    <!-- ko foreach: getRegion('before-fields') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <div id="packstation-new-address-form" class="fieldset address">
+        <each args="getRegion('additional-fieldsets')" render="" />
+    </div>
+</form>

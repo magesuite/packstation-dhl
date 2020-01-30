@@ -1,0 +1,66 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div id="packstation-selector-popup">
+    <div class="block block-search packstation-selector-search">
+        <div class="field search">
+            <label class="label" for="packstation-selector-search-input">
+                <translate args="'Search'" />
+            </label>
+            <div class="control">
+                <input
+                    id="packstation-selector-search-input"
+                    type="text"
+                    name="packstation-selector-search-query"
+                    class="input-text"
+                    maxlength="128"
+                    textInput="searchQuery"
+                    attr="placeholder: $t('Search with postcode...')"
+                />
+            </div>
+        </div>
+        <div class="actions">
+            <button
+                type="submit"
+                title="Search"
+                class="action search"
+                aria-label="Search"
+            >
+                <translate args="'Search'" />
+            </button>
+        </div>
+    </div>
+    <p
+        class="packstation-selector-popup-no-locations"
+        if="searchQuery() && nearbyPackstations() && !nearbyPackstations().length"
+    >
+        <translate
+            args="'We were unable to find nearby locations for provided postcode.'"
+        />
+    </p>
+    <p class="packstation-selector-popup-empty-query" ifnot="searchQuery()">
+        <translate
+            args="'Please provide postcode to find nearest packstations.'"
+        />
+    </p>
+    <table
+        class="packstation-selector-popup-table"
+        data-bind="blockLoader: isLoading, visible: nearbyPackstations() && nearbyPackstations().length"
+    >
+        <thead>
+            <tr class="row">
+                <th class="col col-method" translate="'Location Details'"></th>
+                <th class="col col-carrier" translate="'Action'"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--            <each args="data: nearbyPackstations(), as: 'location'" render="{ name:$parent.packstationSelectorPopupItemTemplate}"/>-->
+            <!-- ko foreach: { data: nearbyPackstations(), as: 'location' } -->
+            <!-- ko template: { name: $parent.packstationSelectorPopupItemTemplate } --><!-- /ko -->
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>

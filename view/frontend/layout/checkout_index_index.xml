@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="dhl-packstation" xsi:type="array">
+                                            <item name="component" xsi:type="string">MageSuite_PackstationDhl/js/view/dhl-packstation</item>
+                                            <item name="sortOrder" xsi:type="string">0</item>
+                                            <item name="deps" xsi:type="array">
+                                                <item name="0" xsi:type="string">checkout.steps.shipping-step.shippingAddress</item>
+                                            </item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="packstation-selector" xsi:type="array">
+                                                    <item name="component" xsi:type="string">MageSuite_PackstationDhl/js/view/packstation-selector</item>
+                                                    <item name="displayArea" xsi:type="string">packstation-selector</item>
+                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="customer-email" xsi:type="array">
+                                                            <item name="component" xsi:type="string">MageSuite_PackstationDhl/js/view/form/element/email</item>
+                                                            <item name="displayArea" xsi:type="string">customer-email</item>
+                                                            <item name="tooltip" xsi:type="array">
+                                                                <item name="description" xsi:type="string" translate="true">We'll send your order confirmation here.</item>
+                                                            </item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="before-login-form" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">before-login-form</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <!-- before login form fields -->
+                                                                    </item>
+                                                                </item>
+                                                                <item name="additional-login-form-fields" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <!-- additional login form fields -->
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="packstation-address-form" xsi:type="array">
+                                                            <item name="component" xsi:type="string">MageSuite_PackstationDhl/js/view/shipping-address/form</item>
+                                                            <item name="displayArea" xsi:type="string">packstation-address-form</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="packstation-address-form-fieldset" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">additional-fieldsets</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="dhl-customer-number" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="customScope" xsi:type="string">packstationAddress</item>
+                                                                                <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                            </item>
+                                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                            <item name="dataScope" xsi:type="string">packstationAddress.dhl_customer_number</item>
+                                                                            <item name="label" xsi:type="string" translate="true">DHL Customer Number</item>
+                                                                            <item name="sortOrder" xsi:type="string">1</item>
+                                                                            <item name="validation" xsi:type="array">
+                                                                                <item name="required-entry" xsi:type="string">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="popUpList" xsi:type="array">
+                                                            <item name="element" xsi:type="string">#opc-packstation-selector-popup</item>
+                                                            <item name="options" xsi:type="array">
+                                                                <item name="type" xsi:type="string">popup</item>
+                                                                <item name="responsive" xsi:type="boolean">true</item>
+                                                                <item name="innerScroll" xsi:type="boolean">true</item>
+                                                                <item name="title" xsi:type="string" translate="true">Select Packstation</item>
+                                                                <item name="trigger" xsi:type="string">opc-packstation-selector-popup</item>
+                                                                <item name="buttons" xsi:type="array"/>
+                                                                <item name="modalClass" xsi:type="string">packstation-selector-popup</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
+

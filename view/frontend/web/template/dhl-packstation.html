@@ -1,0 +1,17 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<li
+    id="dhl-packstation"
+    if="isVisible"
+    css="'selected-shipping': !isPackstationSelected(), 'selected-packstation': isPackstationSelected()"
+>
+    <if args="isPackstationSelected">
+        <each args="getRegion('packstation-selector')">
+            <div template=" {name: getTemplate()}"></div>
+        </each>
+    </if>
+</li>

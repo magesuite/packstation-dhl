@@ -1,0 +1,31 @@
+<if args="!isLoading() && !selectedPackstation()">
+    <p class="no-selected-location">
+        <translate
+            args="'We could not preselect any packstation based on available information, please select it manually.'"
+        />
+    </p>
+</if>
+<div
+    class="selected-location-details location-details"
+    if="selectedPackstation"
+>
+    <p class="location-name">
+        <text args="selectedPackstation().name" />
+    </p>
+    <p class="location-address">
+        <text args="selectedPackstation().street" /><br />
+        <text args="selectedPackstation().city" />,
+        <span text="selectedPackstation().region"></span>
+        <text args="selectedPackstation().postcode" /><br />
+        <text args="selectedPackstation().country" /><br />
+        <a
+            if="selectedPackstation().telephone"
+            attr="'href': 'tel:' + selectedPackstation().telephone"
+            text="selectedPackstation().telephone"
+        ></a>
+    </p>
+    <p
+        class="location-description"
+        html="selectedPackstation().description"
+    ></p>
+</div>

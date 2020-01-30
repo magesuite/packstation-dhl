@@ -1,0 +1,20 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div id="delivery-method-selector" class="step-content">
+    <button
+        class="action action-select-shipping"
+        css="'selected': !isPackstationSelected()"
+        click="selectShipping"
+        translate="'Shipping'"
+    ></button>
+    <button
+        class="action action-select-packstation"
+        css="'selected': isPackstationSelected()"
+        click="selectPackstation"
+        translate="'DHL Packstation'"
+    ></button>
+</div>
