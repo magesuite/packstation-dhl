@@ -1,0 +1,12 @@
+{
+    "quote": {
+        "column": {
+            "dhl_customer_number": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "dhl_customer_number": true
+        }
+    }
+}

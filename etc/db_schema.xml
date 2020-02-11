@@ -1,0 +1,8 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="dhl_customer_number" length="255" nullable="true" comment="Dhl Customer Number"/>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="dhl_customer_number" length="255" nullable="true" comment="Dhl Customer Number"/>
+    </table>
+</schema>
