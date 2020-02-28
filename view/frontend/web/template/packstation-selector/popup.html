@@ -7,8 +7,11 @@
 <div id="packstation-selector-popup">
     <div class="block block-search packstation-selector-search">
         <div class="field search">
-            <label class="label" for="packstation-selector-search-input">
-                <translate args="'Search'" />
+            <label
+                class="label"
+                for="packstation-selector-search-input"
+                translate="'Search'"
+            >
             </label>
             <div class="control">
                 <input
@@ -28,23 +31,17 @@
                 title="Search"
                 class="action search"
                 aria-label="Search"
-            >
-                <translate args="'Search'" />
-            </button>
+                translate="'Search'"
+            ></button>
         </div>
     </div>
     <p
         class="packstation-selector-popup-no-locations"
         if="searchQuery() && nearbyPackstations() && !nearbyPackstations().length"
-    >
-        <translate
-            args="'We were unable to find nearby locations for provided postcode.'"
-        />
-    </p>
+        translate="'We were unable to find nearby locations for provided postcode.'"
+    ></p>
     <p class="packstation-selector-popup-empty-query" ifnot="searchQuery()">
-        <translate
-            args="'Please provide postcode to find nearest packstations.'"
-        />
+        <!-- ko i18n: 'Please provide postcode to find nearest packstations.' --><!-- /ko -->
     </p>
     <table
         class="packstation-selector-popup-table"

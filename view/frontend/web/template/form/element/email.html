@@ -39,11 +39,8 @@
                     <span
                         class="note"
                         data-bind="fadeVisible: isPasswordVisible() == false"
-                    >
-                        <translate
-                            args="'You can create an account after checkout.'"
-                        />
-                    </span>
+                        translate="'You can create an account after checkout.'"
+                    ></span>
                 </div>
             </div>
 
@@ -53,9 +50,11 @@
                 data-bind="fadeVisible: isPasswordVisible"
             >
                 <div class="field">
-                    <label class="label" for="customer-password">
-                        <translate args="'Password'" />
-                    </label>
+                    <label
+                        class="label"
+                        for="customer-password"
+                        translate="'Password'"
+                    ></label>
                     <div class="control">
                         <input
                             class="input-text"
@@ -85,9 +84,8 @@
                             type="submit"
                             class="action login primary"
                             data-action="checkout-method-login"
-                        >
-                            <translate args="'Login'"></translate>
-                        </button>
+                            translate="'Login'"
+                        ></button>
                     </div>
                     <div class="secondary">
                         <a

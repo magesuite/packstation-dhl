@@ -9,9 +9,7 @@
         args="getRegion('packstation-address-form')"
         render=""
     />
-    <div class="step-title" data-role="title">
-        <translate args="'Packstation'" />
-    </div>
+    <div class="step-title" data-role="title" translate="'Packstation'"></div>
     <div
         id="checkout-step-packstation-selector"
         class="step-content"
@@ -31,11 +29,15 @@
                         class="button action"
                         click="openPopup"
                     >
-                        <span if="selectedPackstation">
-                            <translate args="'Select Other'" />
+                        <span
+                            if="selectedPackstation"
+                            translate="'Select Other'"
+                        >
                         </span>
-                        <span ifnot="selectedPackstation">
-                            <translate args="'Select Packstation'" />
+                        <span
+                            ifnot="selectedPackstation"
+                            translate="'Select Packstation'"
+                        >
                         </span>
                     </button>
                 </div>
@@ -48,9 +50,7 @@
                         enable="selectedPackstation"
                         disabled
                     >
-                        <span>
-                            <translate args="'Next'" />
-                        </span>
+                        <span translate="'Next'"></span>
                     </button>
                 </div>
             </div>
