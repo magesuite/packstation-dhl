@@ -1,0 +1,30 @@
+Live,Live
+Sandbox,Sandbox
+"Email Address","Email Address"
+"Forgot Your Password?","Forgot Your Password?"
+"Please provide postcode to find nearest packstations.","Please provide postcode to find nearest packstations."
+"We could not preselect any packstation based on available information, please select it manually.","We could not preselect any packstation based on available information, please select it manually."
+"Ship To:","Ship To:"
+edit,edit
+"Shipping Method:","Shipping Method:"
+Packstation,Packstation
+"Packstation DHL","Packstation DHL"
+Enabled,Enabled
+"Method Name","Method Name"
+Title,Title
+Mode,Mode
+"API Login","API Login"
+"API Password","API Password"
+Price,Price
+"Minimum subtotal for free shipping","Minimum subtotal for free shipping"
+"Maximum subtotal","Maximum subtotal"
+"Maximum weight","Maximum weight"
+"Sort Order","Sort Order"
+Type,Type
+"Ship to Applicable Countries","Ship to Applicable Countries"
+"Ship to Specific Countries","Ship to Specific Countries"
+"Show Method if Not Applicable","Show Method if Not Applicable"
+"Displayed Error Message","Displayed Error Message"
+"We'll send your order confirmation here.","We'll send your order confirmation here."
+"DHL Customer Number","DHL Customer Number"
+"Select Packstation","Select Packstation"
