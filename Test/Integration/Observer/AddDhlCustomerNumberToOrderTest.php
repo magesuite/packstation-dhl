@@ -44,7 +44,7 @@ class AddCustomerTypeToOrderTest extends \PHPUnit\Framework\TestCase
      */
     protected $orderRepository;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
 

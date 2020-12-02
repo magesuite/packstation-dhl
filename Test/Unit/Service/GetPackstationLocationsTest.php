@@ -10,7 +10,7 @@ class GetPackstationLocationsTest extends \PHPUnit\Framework\TestCase
      */
     protected $getPackstationLocations;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $objectManager = \Magento\TestFramework\ObjectManager::getInstance();
         $this->getPackstationLocations = $objectManager->get(\MageSuite\PackstationDhl\Service\GetPackstationLocations::class);
