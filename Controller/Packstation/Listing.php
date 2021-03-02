@@ -2,7 +2,7 @@
 
 namespace MageSuite\PackstationDhl\Controller\Packstation;
 
-class Listing extends \Magento\Framework\App\Action\Action implements \Magento\Framework\App\Action\HttpPostActionInterface
+class Listing extends \Magento\Framework\App\Action\Action implements \Magento\Framework\App\Action\HttpGetActionInterface
 {
     /**
      * @var \Magento\Framework\Controller\Result\JsonFactory
@@ -14,23 +14,33 @@ class Listing extends \Magento\Framework\App\Action\Action implements \Magento\F
      */
     protected $getPackstationLocations;
 
+    /**
+     * @var \Magento\PageCache\Model\Config
+     */
+    protected $pageCacheConfig;
+
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \MageSuite\PackstationDhl\Service\GetPackstationLocations $getPackstationLocations
+        \MageSuite\PackstationDhl\Service\GetPackstationLocations $getPackstationLocations,
+        \Magento\PageCache\Model\Config $pageCacheConfig
     ) {
         parent::__construct($context);
 
         $this->resultJsonFactory = $resultJsonFactory;
         $this->getPackstationLocations = $getPackstationLocations;
+        $this->pageCacheConfig = $pageCacheConfig;
     }
 
     public function execute()
     {
+        $zip = (string)$this->getRequest()->getParam(\MageSuite\PackstationDhl\Service\GetPackstationLocations::API_ZIP_FIELD);
         $resultJson = $this->resultJsonFactory->create();
-
-        $zip = $this->getRequest()->getParam(\MageSuite\PackstationDhl\Service\GetPackstationLocations::API_ZIP_FIELD, null);
         $response = $this->getPackstationLocations->execute($zip);
+
+        if (!empty($response)) {
+            $this->getResponse()->setPublicHeaders($this->pageCacheConfig->getTtl());
+        }
 
         return $resultJson->setData($response);
     }

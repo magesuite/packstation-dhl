@@ -5,7 +5,7 @@ namespace MageSuite\PackstationDhl\Test\Integration\Observer;
  * @magentoDbIsolation enabled
  * @magentoAppIsolation enabled
  */
-class AddCustomerTypeToOrderTest extends \PHPUnit\Framework\TestCase
+class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
 {
     const DEFAULT_STORE_ID = 1;
 

@@ -24,9 +24,9 @@ class GetPackstationLocations
         $this->logger = $logger;
     }
 
-    public function execute($zip)
+    public function execute(string $zip)
     {
-        if (empty($zip)) {
+        if (!is_numeric($zip) || strlen($zip) < 2 || strlen($zip) > 5) {
             return null;
         }
 
@@ -40,12 +40,13 @@ class GetPackstationLocations
 
         try {
             $response = $client->getPackstationsByAddress($call);
+
+            return $response->packstation;
         } catch (\Exception $e) {
             $this->logger->error('DHL Packstation resolver error: ' . $e->getMessage());
-            return null;
         }
 
-        return $response->packstation ?? null;
+        return null;
     }
 
     public function prepareCallParameter($zip)

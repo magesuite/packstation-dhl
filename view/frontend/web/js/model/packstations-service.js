@@ -44,7 +44,7 @@ define([
 
             self.isLoading(true);
 
-            return $.post(serviceUrl, { zip: zipCode })
+            return $.get({url: serviceUrl, cache: true}, { zip: zipCode })
                 .then(function(results) {
                     if (!Array.isArray(results)) {
                         return [];
