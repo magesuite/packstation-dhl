@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="hide_packstation_on_paypal_review_page" type="\MageSuite\PackstationDhl\Plugin\Quote\Model\Quote\Address\HidePackstationOnPaypalReview" sortOrder="10" />
+    </type>
+
+    <type name="MageSuite\PackstationDhl\Plugin\Quote\Model\Quote\Address\HidePackstationOnPaypalReview">
+        <arguments>
+            <argument name="forbiddenActionList" xsi:type="array">
+                <item name="paypal_express_review" xsi:type="string">paypal_express_review</item>
+                <item name="payone_paypal_returned" xsi:type="string">payone_paypal_returned</item>
+                <item name="payone_onepage_review" xsi:type="string">payone_onepage_review</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
