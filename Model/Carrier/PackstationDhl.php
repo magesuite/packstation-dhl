@@ -49,8 +49,7 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         }
 
         $result = $this->rateResultFactory->create();
-
-        $shippingPrice = $this->getShippingPrice();
+        $shippingPrice = $this->getShippingPrice($request);
 
         if ($shippingPrice !== false) {
             $method = $this->createResultMethod($shippingPrice);
@@ -60,14 +59,20 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         return $result;
     }
 
-    protected function getShippingPrice()
+    protected function getShippingPrice(\Magento\Quote\Model\Quote\Address\RateRequest $request)
     {
         $shippingPrice = $this->getConfigData('price');
-
         $shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
 
         if ($shippingPrice === false) {
             $shippingPrice = '0.00';
+        }
+
+        $minimumSubtotal = (float)$this->getConfigData('minimum_subtotal_for_free_shipping');
+        $orderSubtotal = (float)$request->getData('base_subtotal_incl_tax');
+
+        if ($minimumSubtotal && $orderSubtotal >= $minimumSubtotal) {
+            $shippingPrice = 0;
         }
 
         return $shippingPrice;
