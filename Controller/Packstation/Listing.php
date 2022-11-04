@@ -4,6 +4,8 @@ namespace MageSuite\PackstationDhl\Controller\Packstation;
 
 class Listing extends \Magento\Framework\App\Action\Action implements \Magento\Framework\App\Action\HttpGetActionInterface
 {
+    const FORM_ZIP_FIELD = 'zip';
+
     /**
      * @var \Magento\Framework\Controller\Result\JsonFactory
      */
@@ -34,7 +36,7 @@ class Listing extends \Magento\Framework\App\Action\Action implements \Magento\F
 
     public function execute()
     {
-        $zip = (string)$this->getRequest()->getParam(\MageSuite\PackstationDhl\Service\GetPackstationLocations::API_ZIP_FIELD);
+        $zip = (string)$this->getRequest()->getParam(self::FORM_ZIP_FIELD);
         $resultJson = $this->resultJsonFactory->create();
         $response = $this->getPackstationLocations->execute($zip);
 
