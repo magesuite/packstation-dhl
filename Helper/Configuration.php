@@ -5,7 +5,10 @@ namespace MageSuite\PackstationDhl\Helper;
 class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 {
     const XML_PATH_CONFIGURATION = 'carriers/dhl_packstation';
+
     const DHL_CUSTOMER_NUMBER = 'dhl_customer_number';
+
+    const VALUE_MODE_LIVE = 'live';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface

@@ -20,8 +20,6 @@ class GetPackstationLocationsTest extends \PHPUnit\Framework\TestCase
     {
         $zip = 12345;
         $parameter = $this->getPackstationLocations->prepareCallParameter($zip);
-
-        $this->assertEmpty($parameter->key);
-        $this->assertEquals($zip, $parameter->address['zip']);
+        $this->assertEquals($zip, $parameter['postalCode']);
     }
 }
