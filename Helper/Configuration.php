@@ -12,12 +12,9 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $scopeConfig;
 
-    /**
-     * @var \Magento\Framework\Encryption\EncryptorInterface
-     */
-    protected $encryptor;
+    protected \Magento\Framework\Encryption\EncryptorInterface $encryptor;
 
-    protected $config = null;
+    protected ?\Magento\Framework\DataObject $config = null;
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -30,28 +27,27 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         $this->encryptor = $encryptor;
     }
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
-        return (bool)$this->getConfig()->getActive();
+        return (bool) $this->getConfig()->getActive();
     }
 
-    public function getMode()
+    public function getMode(): string
     {
         return $this->getConfig()->getMode();
     }
 
-    public function getApiLogin()
+    public function getApiKey(): string
     {
-        return $this->getConfig()->getApiLogin();
+        return $this->getConfig()->getApiKey();
     }
 
-    public function getApiPassword()
+    public function isDebugEnabled(): bool
     {
-        $apiPassowrd = $this->getConfig()->getApiPassword();
-        return $this->encryptor->decrypt($apiPassowrd);
+        return (bool) $this->getConfig()->getDebug();
     }
 
-    protected function getConfig()
+    protected function getConfig():? \Magento\Framework\DataObject
     {
         if ($this->config === null) {
             $config = $this->scopeConfig->getValue(self::XML_PATH_CONFIGURATION, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);

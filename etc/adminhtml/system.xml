@@ -18,18 +18,16 @@
                     <label>Mode</label>
                     <source_model>MageSuite\PackstationDhl\Model\Config\Source\Mode</source_model>
                 </field>
-                <field id="api_login" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>API Login</label>
+                <field id="api_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>API Key</label>
                     <comment>
-                        <![CDATA[For live access, please provide an ApplicationID, for sandbox access, please provide DeveloperID. You can find them under "My Account" section in DHL panel.]]>
+                        <![CDATA[Provide API Key for Location Finder - Unified API. It can be found in your DHL developer account in aplication details under 'Credential' section]]>
                     </comment>
                 </field>
-                <field id="api_password" translate="label" type="obscure" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>API Password</label>
-                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-                    <comment>
-                        <![CDATA[Please provide application token. You can display or generate these after the release of your application for live use under "My Applications" in DHL Panel. For sandbox, please use the password with which you logged into the developer portal.]]>
-                    </comment>
+                <field id="debug" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Enable Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable this option to log requests]]></comment>
                 </field>
                 <field id="price" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
                     <label>Price</label>

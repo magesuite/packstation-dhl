@@ -65,7 +65,7 @@ define([
         },
 
         /**
-         * Select location for sipping.
+         * Select location for shipping.
          *
          * @param {Object} location
          * @returns void
@@ -123,39 +123,31 @@ define([
          * @param {Object} result - Single result object returned by REST endpoint.
          */
         formatResult: function(result) {
-            var address = result.address,
+            var place = result.place,
+                address = place.address,
                 location = result.location,
-                country = address.country,
-                countryId,
-                regionId = 0,
-                regions;
+                geolocation = place.geo,
+                countryId = address.countryCode,
+                countryName,
+                regionId = 0;
 
-            countryId =
-                _.findKey(countryData(), function(countryInfo) {
-                    return countryInfo.name === country;
-                }) || 'DE';
-
-            regions =
+            countryName = 
                 (countryData()[countryId] &&
-                    countryData()[countryId].regions) ||
-                [];
-            regionId = _.findKey(regions, function(region) {
-                return region.name === address.district;
-            });
+                    countryData()[countryId].name) ||
+                countryId;
 
             return {
-                name: address.name,
-                description: address.remark,
-                latitude: location.latitude,
-                longitude: location.longitude,
-                street: [address.street + ' ' + address.streetNo],
-                city: address.city,
-                postcode: address.zip,
-                country: country,
+                name: result.name,
+                description: place.containedInPlace?.name,
+                latitude: geolocation.latitude,
+                longitude: geolocation.longitude,
+                street: [address.streetAddress],
+                city: address.addressLocality,
+                postcode: address.postalCode,
+                country: countryName,
                 countryId: countryId,
-                region: address.district,
                 regionId: regionId,
-                packstation_id: result.packstationId,
+                packstation_id: location.keywordId,
             };
         },
 

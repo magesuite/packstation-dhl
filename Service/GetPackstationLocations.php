@@ -4,24 +4,28 @@ namespace MageSuite\PackstationDhl\Service;
 
 class GetPackstationLocations
 {
-    const API_ZIP_FIELD = 'zip';
+    const API_ZIP_FIELD = 'postalCode';
 
-    /**
-     * @var \MageSuite\PackstationDhl\Service\Soap
-     */
-    protected $soap;
+    const API_COUNTRY_CODE_FIELD = 'countryCode';
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    const API_SERVICE_TYPE_FIELD = 'serviceType';
+
+    const API_LOCATION_TYPE_FIELD = 'locationType';
+
+    const API_RADIUS_FIELD = 'radius';
+
+    const API_LIMIT_FIELD = 'limit';
+
+    protected \MageSuite\PackstationDhl\Service\DhlApiClient $dhlApiClient;
+
+    protected \Psr\Log\LoggerInterface $logger;
 
     public function __construct(
-        \MageSuite\PackstationDhl\Service\Soap $soap,
+        \MageSuite\PackstationDhl\Service\DhlApiClient $dhlApiClient,
         \Psr\Log\LoggerInterface $logger
     ) {
-        $this->soap = $soap;
         $this->logger = $logger;
+        $this->dhlApiClient = $dhlApiClient;
     }
 
     public function execute(string $zip)
@@ -30,19 +34,12 @@ class GetPackstationLocations
             return null;
         }
 
-        $client = $this->soap->getClient();
-
-        if (empty($client)) {
-            return null;
-        }
-
-        $call = $this->prepareCallParameter($zip);
-
         try {
-            $response = $client->getPackstationsByAddress($call);
+            $requestData = $this->prepareCallParameter($zip);
+            $response = $this->dhlApiClient->getPackstationsByAddress($requestData);
 
-            return $response->packstation;
-        } catch (\Exception $e) {
+            return $response->locations;
+        } catch (\Creativestyle\MageSuite\PackstationDhl\Exception\ApiException $e) {
             $this->logger->error('DHL Packstation resolver error: ' . $e->getMessage());
         }
 
@@ -51,11 +48,13 @@ class GetPackstationLocations
 
     public function prepareCallParameter($zip)
     {
-        $call = new \stdClass();
-
-        $call->key = '';
-        $call->address = [self::API_ZIP_FIELD => $zip];
-
-        return $call;
+        return [
+            self::API_COUNTRY_CODE_FIELD => 'DE',
+            self::API_LOCATION_TYPE_FIELD => 'locker',
+            self::API_SERVICE_TYPE_FIELD => 'parcel:pick-up-all',
+            self::API_RADIUS_FIELD => '1000000',
+            self::API_LIMIT_FIELD => 50,
+            self::API_ZIP_FIELD => $zip
+        ];
     }
 }
