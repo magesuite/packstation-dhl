@@ -20,22 +20,26 @@ class DhlApiClient
 
     protected \Psr\Log\LoggerInterface $logger;
 
+    protected \Magento\Framework\Serialize\SerializerInterface $serializer;
+
     public function __construct(
         \MageSuite\PackstationDhl\Helper\Configuration $configuration,
         \Magento\Framework\HTTP\Client\Curl $curl,
-        \Psr\Log\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger,
+        \Magento\Framework\Serialize\SerializerInterface $serializer
     ) {
         $this->configuration = $configuration;
         $this->curl = $curl;
         $this->logger = $logger;
+        $this->serializer = $serializer;
     }
 
-    public function getPackstationsByAddress($data)
+    public function getPackstationsByAddress($data): array
     {
         return $this->sendRequest(self::API_METHOD_FIND_BY_ADDRESS, $data);
     }
 
-    protected function sendRequest($method, $data)
+    protected function sendRequest($method, $data): array
     {
         $this->curl->setHeaders([
             'Content-Type' => \Magento\Analytics\Model\Connector\Http\JsonConverter::CONTENT_MEDIA_TYPE,
@@ -54,13 +58,13 @@ class DhlApiClient
         }
 
         if ($status !== self::HTTP_OK) {
-            throw new \Creativestyle\MageSuite\PackstationDhl\Exception\ApiException($result);
+            throw new \MageSuite\PackstationDhl\Exception\ApiException($result);
         }
 
-        return json_decode($result);
+        return $this->serializer->unserialize($result);
     }
 
-    protected function getUri($method, $data)
+    protected function getUri($method, $data): string
     {
         return sprintf(
             '%s/%s?%s',
@@ -70,13 +74,14 @@ class DhlApiClient
         );
     }
 
-    protected function getApiEndpoint()
+    protected function getApiEndpoint(): string
     {
         $mode = $this->configuration->getMode();
-        return $mode == 'live' ? self::API_ENDPOINT_LIVE : self::API_ENDPOINT_SANDBOX;
+        return $mode == \MageSuite\PackstationDhl\Helper\Configuration::VALUE_MODE_LIVE ?
+            self::API_ENDPOINT_LIVE : self::API_ENDPOINT_SANDBOX;
     }
 
-    protected function logRequest($method, $data, $status, $result)
+    protected function logRequest($method, $data, $status, $result): void
     {
         $this->logger->info(sprintf('DHL API request method %s with data: %s, returned status %s and result: %s', $method, json_encode($data), $status, $result));
     }
