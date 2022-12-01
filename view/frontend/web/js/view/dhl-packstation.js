@@ -12,6 +12,7 @@ define([
     'Magento_Checkout/js/model/shipping-rate-service',
     'MageSuite_PackstationDhl/js/model/shipping-rate-processor/packstation-address',
     'MageSuite_PackstationDhl/js/model/packstations-service',
+    'Magento_Checkout/js/action/select-shipping-address',
 ], function(
     Component,
     _,
@@ -25,7 +26,8 @@ define([
     stepNavigator,
     shippingRateService,
     shippingRateProcessor,
-    packstationsService
+    packstationsService,
+    selectShippingAddress
 ) {
     'use strict';
 
@@ -43,6 +45,7 @@ define([
             defaultCountry: window.checkoutConfig.defaultCountryId,
             rates: shippingService.getShippingRates(),
             inStoreMethod: null,
+            storedShippingAddress: {}
         },
 
         /**
@@ -61,8 +64,16 @@ define([
             }, this);
             this.convertAddressType(quote.shippingAddress());
 
-            this.isPackstationSelected.subscribe(function() {
+            this.isPackstationSelected.subscribe(function(isSelected) {
                 this.preselectLocation();
+
+                if (!isSelected && this.storedShippingAddress) {
+                    selectShippingAddress(this.storedShippingAddress);
+                } else {
+                    if (['customer-address', 'new-customer-address'].includes(quote.shippingAddress().getType())) {
+                        this.storedShippingAddress = quote.shippingAddress();
+                    }
+                }
             }, this);
             this.preselectLocation();
 
@@ -129,7 +140,6 @@ define([
                     'shippingAddress',
                     quote.shippingAddress()
                 );
-                checkoutProvider.trigger('data.reset');
             });
         },
 

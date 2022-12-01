@@ -1,6 +1,5 @@
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Adjust shipping method title, when the chosen shipping method is Packstation
  */
 
 define(['Magento_Checkout/js/model/quote'], function(quote) {
@@ -25,10 +24,7 @@ define(['Magento_Checkout/js/model/quote'], function(quote) {
                 return this._super();
             }
 
-            title =
-                shippingMethod['carrier_title'] +
-                ' - ' +
-                shippingMethod['method_title'];
+            title = `${shippingMethod['carrier_title'] ?? ''} - ${shippingMethod['method_title'] ?? ''}`;
 
             if (quote.shippingAddress().firstname !== undefined) {
                 locationName =
