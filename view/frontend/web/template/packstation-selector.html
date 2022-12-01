@@ -3,20 +3,20 @@
     data-bind="blockLoader: isLoading"
     css="'packstation-selected': selectedPackstation"
 >
-    <each if="!quoteIsVirtual()" args="getRegion('customer-email')" render="" />
+    <each if="!quoteIsVirtual()" args="getRegion('customer-email')" render=""></each>
     <each
         if="!quoteIsVirtual()"
         args="getRegion('packstation-address-form')"
         render=""
-    />
+    ></each>
     <div class="step-title" data-role="title" translate="'Packstation'"></div>
     <div
         id="checkout-step-packstation-selector"
         class="step-content"
         data-role="content"
     >
-        <render args="selectedPackstationTemplate" />
-        <each args="getRegion('after-selected-location')" render="" />
+        <render args="selectedPackstationTemplate"></render>
+        <each args="getRegion('after-selected-location')" render=""></each>
         <form
             class="form-continue"
             submit="setPackstationInformation"
@@ -60,4 +60,4 @@
 <div
     id="opc-packstation-selector-popup"
     render="packstationSelectorPopupTemplate"
-/>
+></div>

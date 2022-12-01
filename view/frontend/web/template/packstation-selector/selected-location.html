@@ -8,14 +8,14 @@
     if="selectedPackstation"
 >
     <p class="location-name">
-        <text args="selectedPackstation().name" />
+        <text args="selectedPackstation().name" ></text>
     </p>
     <p class="location-address">
-        <text args="selectedPackstation().street" /><br />
-        <text args="selectedPackstation().city" />,
+        <text args="selectedPackstation().street"></text><br />
+        <text args="selectedPackstation().city"></text>,
         <span text="selectedPackstation().region"></span>
-        <text args="selectedPackstation().postcode" /><br />
-        <text args="selectedPackstation().country" /><br />
+        <text args="selectedPackstation().postcode"></text><br />
+        <text args="selectedPackstation().country"></text><br />
         <a
             if="selectedPackstation().telephone"
             attr="'href': 'tel:' + selectedPackstation().telephone"

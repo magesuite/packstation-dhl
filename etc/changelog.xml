@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module
+        id="MageSuite_PackstationDhl"
+        name="MageSuite_PackstationDhl"
+        url="https://github.com/magesuite/packstation-dhl">
+        <changelog>
+            <tag version="2.0.0" date="2022-12-01">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Make module compatible with Magento >= 2.4.4. Fix user joureny bugs</overview>
+                    <description>
+                        Fix closings of html tags. 
+                        Do not display undefined when carrier_title or method_title are not set in admin panel.
+                        Prevent possibility of going to the payment step without shipping address: 
+                        - when a user choose packstation - store previous shipping adress 
+                        - select this address when a user check again a standard shipping method
+                    </description>
+                    <ticket_id>RK-361</ticket_id>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>
