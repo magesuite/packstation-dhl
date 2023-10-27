@@ -11,6 +11,7 @@
                 <title>DHL Packstation</title>
                 <type>O</type>
                 <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <country_code>DE</country_code>
             </dhl_packstation>
         </carriers>
     </default>

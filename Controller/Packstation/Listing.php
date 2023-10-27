@@ -6,20 +6,9 @@ class Listing extends \Magento\Framework\App\Action\Action implements \Magento\F
 {
     const FORM_ZIP_FIELD = 'zip';
 
-    /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
-     */
-    protected $resultJsonFactory;
-
-    /**
-     * @var \MageSuite\PackstationDhl\Service\GetPackstationLocations
-     */
-    protected $getPackstationLocations;
-
-    /**
-     * @var \Magento\PageCache\Model\Config
-     */
-    protected $pageCacheConfig;
+    protected \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory;
+    protected \MageSuite\PackstationDhl\Service\GetPackstationLocations $getPackstationLocations;
+    protected \Magento\PageCache\Model\Config $pageCacheConfig;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,

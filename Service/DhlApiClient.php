@@ -1,32 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\PackstationDhl\Service;
 
 class DhlApiClient
 {
-    const API_ENDPOINT_SANDBOX = 'https://api-sandbox.dhl.com/location-finder/v1';
+    public const VALUE_MODE_LIVE = 'live';
 
-    const API_ENDPOINT_LIVE = 'https://api.dhl.com/location-finder/v1';
+    public const API_ENDPOINT_SANDBOX = 'https://api-sandbox.dhl.com/location-finder/v1';
+    public const API_ENDPOINT_LIVE = 'https://api.dhl.com/location-finder/v1';
+    public const API_METHOD_FIND_BY_ADDRESS = 'find-by-address';
 
-    const API_METHOD_FIND_BY_ADDRESS = 'find-by-address';
-
-    const TIMEOUT = 30;
-
-    const HTTP_OK = 200;
+    public const TIMEOUT = 30;
+    public const HTTP_OK = 200;
 
     protected \MageSuite\PackstationDhl\Helper\Configuration $configuration;
-
     protected \Magento\Framework\HTTP\Client\Curl $curl;
-
-    protected \Psr\Log\LoggerInterface $logger;
-
     protected \Magento\Framework\Serialize\SerializerInterface $serializer;
+    protected \Psr\Log\LoggerInterface $logger;
 
     public function __construct(
         \MageSuite\PackstationDhl\Helper\Configuration $configuration,
         \Magento\Framework\HTTP\Client\Curl $curl,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\Serialize\SerializerInterface $serializer
+        \Magento\Framework\Serialize\SerializerInterface $serializer,
+        \Psr\Log\LoggerInterface $logger
     ) {
         $this->configuration = $configuration;
         $this->curl = $curl;
@@ -34,11 +32,17 @@ class DhlApiClient
         $this->serializer = $serializer;
     }
 
+    /**
+     * @throws \MageSuite\PackstationDhl\Exception\ApiException
+     */
     public function getPackstationsByAddress($data): array
     {
         return $this->sendRequest(self::API_METHOD_FIND_BY_ADDRESS, $data);
     }
 
+    /**
+     * @throws \MageSuite\PackstationDhl\Exception\ApiException
+     */
     protected function sendRequest($method, $data): array
     {
         $this->curl->setHeaders([
@@ -77,8 +81,8 @@ class DhlApiClient
     protected function getApiEndpoint(): string
     {
         $mode = $this->configuration->getMode();
-        return $mode == \MageSuite\PackstationDhl\Helper\Configuration::VALUE_MODE_LIVE ?
-            self::API_ENDPOINT_LIVE : self::API_ENDPOINT_SANDBOX;
+
+        return $mode == self::VALUE_MODE_LIVE ? self::API_ENDPOINT_LIVE : self::API_ENDPOINT_SANDBOX;
     }
 
     protected function logRequest($method, $data, $status, $result): void

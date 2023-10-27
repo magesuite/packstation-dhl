@@ -1,12 +1,10 @@
 <?php
+
 namespace MageSuite\PackstationDhl\Plugin\Checkout\Model\ShippingInformationManagement;
 
 class SaveDhlCustomerNumberInQuote
 {
-    /**
-     * @var \Magento\Quote\Api\CartRepositoryInterface
-     */
-    protected $quoteRepository;
+    protected \Magento\Quote\Api\CartRepositoryInterface $quoteRepository;
 
     public function __construct(\Magento\Quote\Api\CartRepositoryInterface $quoteRepository)
     {
@@ -17,7 +15,7 @@ class SaveDhlCustomerNumberInQuote
         \Magento\Checkout\Model\ShippingInformationManagement $subject,
         $cartId,
         \Magento\Checkout\Api\Data\ShippingInformationInterface $addressInformation
-    ) {
+    ): array {
         $shippingAddress = $addressInformation->getShippingAddress();
 
         if (empty($shippingAddress->getExtensionAttributes())) {

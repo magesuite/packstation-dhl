@@ -1,63 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\PackstationDhl\Helper;
 
-class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
+class Configuration
 {
-    const XML_PATH_CONFIGURATION = 'carriers/dhl_packstation';
+    public const XML_PATH_CARRIERS_DHL_PACKSTATION_ACTIVE = 'carriers/dhl_packstation/active';
+    public const XML_PATH_CARRIERS_DHL_PACKSTATION_MODE = 'carriers/dhl_packstation/mode';
+    public const XML_PATH_CARRIERS_DHL_PACKSTATION_API_KEY = 'carriers/dhl_packstation/api_key';
+    public const XML_PATH_CARRIERS_DHL_PACKSTATION_COUNTRY_CODE = 'carriers/dhl_packstation/country_code';
+    public const XML_PATH_CARRIERS_DHL_PACKSTATION_DEBUG = 'carriers/dhl_packstation/debug';
 
-    const DHL_CUSTOMER_NUMBER = 'dhl_customer_number';
+    public const DHL_CUSTOMER_NUMBER = 'dhl_customer_number';
 
-    const VALUE_MODE_LIVE = 'live';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $scopeConfig;
-
-    protected \Magento\Framework\Encryption\EncryptorInterface $encryptor;
-
-    protected ?\Magento\Framework\DataObject $config = null;
+    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
 
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface,
-        \Magento\Framework\Encryption\EncryptorInterface $encryptor
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
     ) {
-        parent::__construct($context);
-
-        $this->scopeConfig = $scopeConfigInterface;
-        $this->encryptor = $encryptor;
+        $this->scopeConfig = $scopeConfig;
     }
 
-    public function isEnabled(): bool
+    public function isEnabled(?int $storeId = null): bool
     {
-        return (bool) $this->getConfig()->getActive();
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_CARRIERS_DHL_PACKSTATION_ACTIVE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
-    public function getMode(): string
+    public function getMode(?int $storeId = null): string
     {
-        return $this->getConfig()->getMode();
+        return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_MODE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
-    public function getApiKey(): string
+    public function getApiKey(?int $storeId = null): string
     {
-        return $this->getConfig()->getApiKey();
+        return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_API_KEY, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
-    public function isDebugEnabled(): bool
+    public function getCountryCode(?int $storeId = null): string
     {
-        return (bool) $this->getConfig()->getDebug();
+        return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_COUNTRY_CODE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
-    protected function getConfig():? \Magento\Framework\DataObject
+    public function isDebugEnabled(?int $storeId = null): bool
     {
-        if ($this->config === null) {
-            $config = $this->scopeConfig->getValue(self::XML_PATH_CONFIGURATION, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-
-            $this->config = new \Magento\Framework\DataObject($config ?? []);
-        }
-
-        return $this->config;
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_CARRIERS_DHL_PACKSTATION_DEBUG, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 }
