@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\PackstationDhl\Model\Carrier;
 
 class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements \Magento\Shipping\Model\Carrier\CarrierInterface
@@ -13,15 +14,8 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
      */
     protected $_isFixed = true;
 
-    /**
-     * @var \Magento\Shipping\Model\Rate\ResultFactory
-     */
-    protected $rateResultFactory;
-
-    /**
-     * @var \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory
-     */
-    protected $rateMethodFactory;
+    protected \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory;
+    protected \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory;
 
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
@@ -37,7 +31,7 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         $this->rateMethodFactory = $rateMethodFactory;
     }
 
-    public function getAllowedMethods()
+    public function getAllowedMethods(): array
     {
         return [$this->_code => $this->getConfigData('name')];
     }

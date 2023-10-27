@@ -4,20 +4,9 @@ namespace MageSuite\PackstationDhl\Plugin\Quote\Model\Quote\Address;
 
 class HidePackstationOnPaypalReview
 {
-    /**
-     * @var \MageSuite\PackstationDhl\Model\Carrier\PackstationDhl
-     */
-    protected $packstationDhl;
-
-    /**
-     * @var \Magento\Framework\App\Request\Http
-     */
-    protected $request;
-
-    /**
-     * @var array
-     */
-    protected $forbiddenActionList = [];
+    protected \MageSuite\PackstationDhl\Model\Carrier\PackstationDhl $packstationDhl;
+    protected \Magento\Framework\App\Request\Http $request;
+    protected array $forbiddenActionList = [];
 
     public function __construct(
         \MageSuite\PackstationDhl\Model\Carrier\PackstationDhl $packstationDhl,

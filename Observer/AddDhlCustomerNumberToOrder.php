@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\PackstationDhl\Observer;
 
 class AddDhlCustomerNumberToOrder implements \Magento\Framework\Event\ObserverInterface

@@ -18,6 +18,9 @@
                     <label>Mode</label>
                     <source_model>MageSuite\PackstationDhl\Model\Config\Source\Mode</source_model>
                 </field>
+                <field id="country_code" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Country Code for API request.</label>
+                </field>
                 <field id="api_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>API Key</label>
                     <comment>
