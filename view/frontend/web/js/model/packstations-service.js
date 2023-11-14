@@ -131,7 +131,7 @@ define([
                 countryName,
                 regionId = 0;
 
-            countryName = 
+            countryName =
                 (countryData()[countryId] &&
                     countryData()[countryId].name) ||
                 countryId;
