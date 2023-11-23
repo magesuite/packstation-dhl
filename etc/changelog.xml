@@ -19,6 +19,16 @@
                     <ticket_id>RK-361</ticket_id>
                 </entry>
             </tag>
+            <tag version="2.1.1" date="2023-11-23">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Switch from translation alias to original method</overview>
+                    <description>
+                        Translation alias has not been defined therfore translation should be done with reference to original method.
+                    </description>
+                    <ticket_id>HAKA-2048</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
