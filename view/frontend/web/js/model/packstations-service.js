@@ -171,7 +171,7 @@ define([
             try {
                 error = JSON.parse(response.responseText);
             } catch (exception) {
-                error = $t(
+                error = $.mage.__(
                     'Something went wrong with your request. Please try again later.'
                 );
             }
