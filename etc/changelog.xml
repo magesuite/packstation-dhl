@@ -29,6 +29,13 @@
                     <ticket_id>HAKA-2048</ticket_id>
                 </entry>
             </tag>
+            <tag version="2.1.2" date="2023-05-09">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Fixed for attribute of the password label to match the input's id.</overview>
+                    <ticket_id>LOWA-205</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
