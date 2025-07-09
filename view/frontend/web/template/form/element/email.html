@@ -19,6 +19,9 @@
             class="fieldset"
             data-bind="blockLoader: isLoading"
         >
+            <legend class="cs-visually-hidden">
+                <span data-bind="i18n: 'Email Address'"></span>
+            </legend>
             <div class="field required">
                 <label class="label" for="packstation-checkout-customer-email">
                     <span data-bind="i18n: 'Email Address'"></span>
@@ -27,6 +30,7 @@
                     <input
                         class="input-text"
                         type="email"
+                        autocomplete="email"
                         data-bind="
                                 textInput: email,
                                 hasFocus: emailFocused,
@@ -49,6 +53,9 @@
                 class="fieldset hidden-fields"
                 data-bind="fadeVisible: isPasswordVisible"
             >
+                <legend>
+                    <span data-bind="i18n: 'Password'"></span>
+                </legend>
                 <div class="field">
                     <label
                         class="label"
