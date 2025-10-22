@@ -36,6 +36,18 @@
                     <ticket_id>LOWA-205</ticket_id>
                 </entry>
             </tag>
+            <tag version="2.1.4" date="2025-10-22">
+                <entry>
+                    <type>FIX</type>
+                    <overview>[A11y] Add improvements for dhl-packstation template</overview>
+                    <description>
+                        Visibility of the template has been modified to be controlled by both isVisible and isPackstationSelected observables.
+                        This ensures that the template is only rendered when it is meant to be visible and when the packstation option is selected, enhancing accessibility and user experience.
+                        Switching from application binding to KO binding should also slightly improve performance by reducing unnecessary parsing.
+                    </description>
+                    <ticket_id>KRG-3183</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
