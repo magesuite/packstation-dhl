@@ -48,6 +48,13 @@
                     <ticket_id>KRG-3183</ticket_id>
                 </entry>
             </tag>
+            <tag version="2.1.5" date="2025-10-28">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Fix visibility condition evaluation for dhl-packstation template</overview>
+                    <ticket_id>KRG-3183</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
