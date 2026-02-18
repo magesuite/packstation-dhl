@@ -17,3 +17,6 @@ Type,Type
 "Show Method if Not Applicable","Laat verzendmethode zien indien niet van toepassing"
 "Displayed Error Message","Weergegeven foutmelding"
 "We'll send your order confirmation here.","We sturen de bevestiging van de bestelling hiernaar toe."
+"We were unable to find nearby locations for provided postcode.","We konden geen nabije locaties vinden voor de opgegeven postcode."
+"Please provide postcode to find nearest packstations.","Voor de zoek naar nabije packstations, dient u een postcode te verstrekken."
+"We could not preselect any packstation based on available information, please select it manually.","We konden geen packstation preselecteren op basis van beschikbare informatie, selecteer deze handmatig."
