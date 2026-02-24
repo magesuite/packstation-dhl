@@ -16,3 +16,7 @@ Type,Tipo
 "Show Method if Not Applicable","Mostrar Método se Não Aplicável"
 "Displayed Error Message","Mensagem de Erro Apresentada"
 "We'll send your order confirmation here.","Enviaremos a confirmação da sua encomenda aqui."
+"We were unable to find nearby locations for provided postcode.","Não conseguimos encontrar locais próximos para a postal fornecida."
+"Please provide postcode to find nearest packstations.","Por favor, forneça a postal para encontrar as packstations mais próximas."
+"We could not preselect any packstation based on available information, please select it manually.","Não conseguimos pré-selecionar qualquer packstation com base na informação disponível, por favor, selecione-a manualmente."
+"Postal code","Código postal"

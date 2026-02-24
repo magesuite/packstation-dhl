@@ -15,3 +15,7 @@ Price,Prix
 "Show Method if Not Applicable","Afficher la méthode si elle n’est pas applicable"
 "Displayed Error Message","Message d’erreur affiché"
 "We'll send your order confirmation here.","Nous vous enverrons votre confirmation de commande ici."
+"We were unable to find nearby locations for provided postcode.","Nous n’avons pas trouvé de points à proximité pour la postal fournie."
+"Please provide postcode to find nearest packstations.","Veuillez fournir la postal pour trouver les packstations les plus proches."
+"We could not preselect any packstation based on available information, please select it manually.","Nous n’avons pas pu présélectionner une packstation basée sur les informations disponibles, veuillez la sélectionner manuellement."
+"Postal code","Code postal"
