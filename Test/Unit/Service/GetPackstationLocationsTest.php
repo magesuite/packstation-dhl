@@ -1,14 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\PacstationDhl\Test\Unit\Service;
 
 class GetPackstationLocationsTest extends \PHPUnit\Framework\TestCase
 {
-
-    /**
-     * @var \MageSuite\PackstationDhl\Service\GetPackstationLocations
-     */
-    protected $getPackstationLocations;
+    protected ?\MageSuite\PackstationDhl\Service\GetPackstationLocations $getPackstationLocations;
 
     protected function setUp(): void
     {
@@ -16,9 +14,9 @@ class GetPackstationLocationsTest extends \PHPUnit\Framework\TestCase
         $this->getPackstationLocations = $objectManager->get(\MageSuite\PackstationDhl\Service\GetPackstationLocations::class);
     }
 
-    public function testItReturnsCorrectParameter()
+    public function testItReturnsCorrectParameter(): void
     {
-        $zip = 12345;
+        $zip = '12345';
         $parameter = $this->getPackstationLocations->prepareCallParameter($zip);
         $this->assertEquals($zip, $parameter['postalCode']);
     }

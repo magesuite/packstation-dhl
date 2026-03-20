@@ -14,13 +14,10 @@ class Configuration
 
     public const DHL_CUSTOMER_NUMBER = 'dhl_customer_number';
 
-    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
-
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-    ) {
-        $this->scopeConfig = $scopeConfig;
-    }
+        protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        protected \Magento\Framework\Encryption\EncryptorInterface $encryptor
+    ) {}
 
     public function isEnabled(?int $storeId = null): bool
     {
@@ -32,9 +29,15 @@ class Configuration
         return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_MODE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
-    public function getApiKey(?int $storeId = null): string
+    public function getApiKey(?int $storeId = null): ?string
     {
-        return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_API_KEY, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
+        $value = $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_API_KEY, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
+
+        if (empty($value)) {
+            return null;
+        }
+
+        return $this->encryptor->decrypt($value);
     }
 
     public function getCountryCode(?int $storeId = null): string

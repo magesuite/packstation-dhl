@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MageSuite\PackstationDhl\Test\Integration\Observer;
 
 /**
@@ -7,42 +10,15 @@ namespace MageSuite\PackstationDhl\Test\Integration\Observer;
  */
 class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
 {
-    const DEFAULT_STORE_ID = 1;
+    protected const DEFAULT_STORE_ID = 1;
 
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    protected $objectManager;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
-     * @var \Magento\Quote\Api\CartManagementInterface
-     */
-    protected $cartManagement;
-
-    /**
-     * @var \Magento\Quote\Api\CartRepositoryInterface
-     */
-    protected $cartRepository;
-
-    /**
-     * @var \Magento\Quote\Model\QuoteManagement
-     */
-    protected $quoteManagement;
-
-    /**
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @var \Magento\Sales\Api\OrderRepositoryInterface
-     */
-    protected $orderRepository;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\Magento\Store\Model\StoreManagerInterface $storeManager;
+    protected ?\Magento\Quote\Api\CartManagementInterface $cartManagement;
+    protected ?\Magento\Quote\Api\CartRepositoryInterface $cartRepository;
+    protected ?\Magento\Quote\Model\QuoteManagement $quoteManagement;
+    protected ?\Magento\Catalog\Api\ProductRepositoryInterface $productRepository;
+    protected ?\Magento\Sales\Api\OrderRepositoryInterface $orderRepository;
 
     protected function setUp(): void
     {
@@ -59,9 +35,9 @@ class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
      * @magentoAppArea frontend
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
-     * @magentoDataFixture loadProducts
+     * @magentoDataFixture MageSuite_PackstationDhl::Test/_files/product.php
      */
-    public function testItAddsDhlCustomerNumberCorrectlyToOrder()
+    public function testItAddsDhlCustomerNumberCorrectlyToOrder(): void
     {
         $dhlCustomerNumber = 321;
 
@@ -76,7 +52,7 @@ class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($dhlCustomerNumber, $order->getData(\MageSuite\PackstationDhl\Helper\Configuration::DHL_CUSTOMER_NUMBER));
     }
 
-    private function prepareQuote($product, $qty, $dhlCustomerNumber)
+    protected function prepareQuote(\Magento\Catalog\Api\Data\ProductInterface $product, int $qty, int $dhlCustomerNumber): \Magento\Quote\Model\Quote
     {
         $addressData = [
             'region' => 'BE',
@@ -121,7 +97,6 @@ class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
         $quote->getShippingAddress()->addShippingRate($rate);
         $quote->getShippingAddress()->setShippingMethod($shippingMethod);
 
-
         $quote->setPaymentMethod('checkmo');
         $quote->setInventoryProcessed(false);
 
@@ -132,15 +107,5 @@ class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
         $quote->setData(\MageSuite\PackstationDhl\Helper\Configuration::DHL_CUSTOMER_NUMBER, $dhlCustomerNumber);
 
         return $quote;
-    }
-
-    public static function loadProducts()
-    {
-        require __DIR__ . '/../../_files/product.php';
-    }
-
-    public static function loadProductsRollback()
-    {
-        require __DIR__ . '/../../_files/product_rollback.php';
     }
 }
