@@ -6,8 +6,6 @@ namespace MageSuite\PackstationDhl\Service;
 
 class DhlApiClient
 {
-    public const VALUE_MODE_LIVE = 'live';
-
     public const API_ENDPOINT_SANDBOX = 'https://api-sandbox.dhl.com/location-finder/v1';
     public const API_ENDPOINT_LIVE = 'https://api.dhl.com/location-finder/v1';
     public const API_METHOD_FIND_BY_ADDRESS = 'find-by-address';
@@ -35,7 +33,7 @@ class DhlApiClient
     /**
      * @throws \MageSuite\PackstationDhl\Exception\ApiException
      */
-    public function getPackstationsByAddress($data): array
+    public function getPackstationsByAddress(array $data): array
     {
         return $this->sendRequest(self::API_METHOD_FIND_BY_ADDRESS, $data);
     }
@@ -43,11 +41,17 @@ class DhlApiClient
     /**
      * @throws \MageSuite\PackstationDhl\Exception\ApiException
      */
-    protected function sendRequest($method, $data): array
+    protected function sendRequest(string $method, array $data): array
     {
+        $apiKey = $this->configuration->getApiKey();
+
+        if (empty($apiKey)) {
+            throw new \MageSuite\PackstationDhl\Exception\ApiException('API key is not set');
+        }
+
         $this->curl->setHeaders([
             'Content-Type' => \Magento\Analytics\Model\Connector\Http\JsonConverter::CONTENT_MEDIA_TYPE,
-            'DHL-API-Key' => $this->configuration->getApiKey()
+            'DHL-API-Key' => $apiKey
         ]);
 
         $this->curl->setOption(CURLOPT_RETURNTRANSFER, true);
@@ -68,7 +72,7 @@ class DhlApiClient
         return $this->serializer->unserialize($result);
     }
 
-    protected function getUri($method, $data): string
+    protected function getUri(string $method, array $data): string
     {
         return sprintf(
             '%s/%s?%s',
@@ -80,12 +84,14 @@ class DhlApiClient
 
     protected function getApiEndpoint(): string
     {
-        $mode = $this->configuration->getMode();
+        if ($this->configuration->getMode() == \MageSuite\PackstationDhl\Model\Config\Source\Mode::MODE_LIVE) {
+            return self::API_ENDPOINT_LIVE;
+        }
 
-        return $mode == self::VALUE_MODE_LIVE ? self::API_ENDPOINT_LIVE : self::API_ENDPOINT_SANDBOX;
+        return self::API_ENDPOINT_SANDBOX;
     }
 
-    protected function logRequest($method, $data, $status, $result): void
+    protected function logRequest(string $method, array $data, int $status, string $result): void // phpcs:ignore
     {
         $this->logger->info(sprintf('DHL API request method %s with data: %s, returned status %s and result: %s', $method, json_encode($data), $status, $result));
     }
