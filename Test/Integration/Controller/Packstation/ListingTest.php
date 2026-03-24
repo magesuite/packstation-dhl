@@ -11,7 +11,7 @@ namespace MageSuite\PackstationDhl\Test\Integration\Controller\Packstation;
  */
 class ListingTest extends \Magento\TestFramework\TestCase\AbstractController
 {
-    protected \PHPUnit\Framework\MockObject\MockObject $dhlApiClientMock;
+    protected ?\PHPUnit\Framework\MockObject\MockObject $dhlApiClientMock = null;
 
     protected function setUp(): void
     {
