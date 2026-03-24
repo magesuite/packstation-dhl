@@ -12,23 +12,23 @@ class AddDhlCustomerNumberToOrderTest extends \PHPUnit\Framework\TestCase
 {
     protected const DEFAULT_STORE_ID = 1;
 
-    protected ?\Magento\TestFramework\ObjectManager $objectManager;
-    protected ?\Magento\Store\Model\StoreManagerInterface $storeManager;
-    protected ?\Magento\Quote\Api\CartManagementInterface $cartManagement;
-    protected ?\Magento\Quote\Api\CartRepositoryInterface $cartRepository;
-    protected ?\Magento\Quote\Model\QuoteManagement $quoteManagement;
-    protected ?\Magento\Catalog\Api\ProductRepositoryInterface $productRepository;
-    protected ?\Magento\Sales\Api\OrderRepositoryInterface $orderRepository;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager = null;
+    protected ?\Magento\Store\Model\StoreManagerInterface $storeManager = null;
+    protected ?\Magento\Quote\Api\CartManagementInterface $cartManagement = null;
+    protected ?\Magento\Quote\Api\CartRepositoryInterface $cartRepository = null;
+    protected ?\Magento\Quote\Model\QuoteManagement $quoteManagement = null;
+    protected ?\Magento\Catalog\Api\ProductRepositoryInterface $productRepository = null;
+    protected ?\Magento\Sales\Api\OrderRepositoryInterface $orderRepository = null;
 
     protected function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-
         $this->storeManager = $this->objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
         $this->cartManagement = $this->objectManager->get(\Magento\Quote\Api\CartManagementInterface::class);
         $this->cartRepository = $this->objectManager->get(\Magento\Quote\Api\CartRepositoryInterface::class);
         $this->productRepository = $this->objectManager->get(\Magento\Catalog\Api\ProductRepositoryInterface::class);
         $this->orderRepository = $this->objectManager->get(\Magento\Sales\Api\OrderRepositoryInterface::class);
+        $this->quoteManagement = $this->objectManager->get(\Magento\Quote\Model\QuoteManagement::class);
     }
 
     /**
