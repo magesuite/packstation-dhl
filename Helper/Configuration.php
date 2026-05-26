@@ -42,7 +42,7 @@ class Configuration
 
     public function getCountryCode(?int $storeId = null): string
     {
-        return $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_COUNTRY_CODE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
+        return (string) $this->scopeConfig->getValue(self::XML_PATH_CARRIERS_DHL_PACKSTATION_COUNTRY_CODE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     public function isDebugEnabled(?int $storeId = null): bool
