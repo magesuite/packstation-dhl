@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\PackstationDhl\Model\Carrier;
 
 class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements \Magento\Shipping\Model\Carrier\CarrierInterface
@@ -14,21 +16,16 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
      */
     protected $_isFixed = true;
 
-    protected \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory;
-    protected \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory;
-
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
-        \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
-        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
+        protected \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
+        protected \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
+        protected \Magento\Framework\App\State $state,
         array $data = []
     ) {
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
-
-        $this->rateResultFactory = $rateResultFactory;
-        $this->rateMethodFactory = $rateMethodFactory;
     }
 
     public function getAllowedMethods(): array
@@ -36,9 +33,13 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         return [$this->_code => $this->getConfigData('name')];
     }
 
-    public function collectRates(\Magento\Quote\Model\Quote\Address\RateRequest $request)
+    public function collectRates(\Magento\Quote\Model\Quote\Address\RateRequest $request): \Magento\Framework\DataObject|bool|null
     {
         if (!$this->getConfigFlag('active')) {
+            return false;
+        }
+
+        if ($this->state->getAreaCode() === \Magento\Framework\App\Area::AREA_ADMINHTML) {
             return false;
         }
 
@@ -53,26 +54,21 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         return $result;
     }
 
-    protected function getShippingPrice(\Magento\Quote\Model\Quote\Address\RateRequest $request)
+    protected function getShippingPrice(\Magento\Quote\Model\Quote\Address\RateRequest $request): float
     {
-        $shippingPrice = $this->getConfigData('price');
+        $shippingPrice = (float)$this->getConfigData('price');
         $shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
-
-        if ($shippingPrice === false) {
-            $shippingPrice = '0.00';
-        }
-
         $minimumSubtotal = (float)$this->getConfigData('minimum_subtotal_for_free_shipping');
         $orderSubtotal = (float)$request->getData('base_subtotal_incl_tax');
 
         if ($minimumSubtotal && $orderSubtotal >= $minimumSubtotal) {
-            $shippingPrice = 0;
+            $shippingPrice = 0.00;
         }
 
         return $shippingPrice;
     }
 
-    protected function createResultMethod($shippingPrice)
+    protected function createResultMethod($shippingPrice): \Magento\Quote\Model\Quote\Address\RateResult\Method
     {
         $method = $this->rateMethodFactory->create();
 
