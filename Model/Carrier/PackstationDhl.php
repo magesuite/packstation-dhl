@@ -33,7 +33,7 @@ class PackstationDhl extends \Magento\Shipping\Model\Carrier\AbstractCarrier imp
         return [$this->_code => $this->getConfigData('name')];
     }
 
-    public function collectRates(\Magento\Quote\Model\Quote\Address\RateRequest $request): \Magento\Framework\DataObject|bool|null
+    public function collectRates(\Magento\Quote\Model\Quote\Address\RateRequest $request): mixed
     {
         if (!$this->getConfigFlag('active')) {
             return false;
