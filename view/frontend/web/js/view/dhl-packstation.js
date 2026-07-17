@@ -45,7 +45,7 @@ define([
             defaultCountry: window.checkoutConfig.defaultCountryId,
             rates: shippingService.getShippingRates(),
             inStoreMethod: null,
-            storedShippingAddress: {}
+            storedShippingAddress: null
         },
 
         /**

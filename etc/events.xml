@@ -3,4 +3,3 @@
         <observer name="add_dhl_customer_number_to_order" instance="MageSuite\PackstationDhl\Observer\AddDhlCustomerNumberToOrder" />
     </event>
 </config>
-
